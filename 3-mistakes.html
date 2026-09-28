@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rawde_vvvvvv — Reels Fix Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#D1E8E2;
+  --paper:#FFFFFF;
+  --ink:#2D2D2D;
+  --gray:#8E8E8E;
+  --yellow:#FCE34D;
+  --orange:#F39C4D;
+  --green:#A8E6CF;
+  --blue:#B2EBF2;
+  --radius-card:26px;
+  --radius-btn:16px;
+  --border:2px solid var(--ink);
+  --shadow-soft:0 10px 30px rgba(45,45,45,.10);
+  --shadow-hard:0 5px 0 var(--ink);
+  --font-head:'Fredoka',sans-serif;
+  --font-body:'Baloo 2',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background-color:var(--bg);
+  background-image:radial-gradient(rgba(45,45,45,.06) 1.5px, transparent 1.5px);
+  background-size:26px 26px;
+  overflow-x:clip;
+  line-height:1.6;
+}
+img,svg{display:block}
+main{width:min(1120px,92%);margin-inline:auto}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.15;font-weight:600}
+p{font-size:clamp(1rem,.9rem + .6vw,1.15rem)}
+
+/* ============ SCROLL PROGRESS BAR ============ */
+#scrollbar-top{
+  position:fixed;top:0;left:0;height:6px;width:0%;
+  background:var(--orange);border-right:3px solid var(--ink);
+  z-index:200;transition:width .1s linear;
+}
+
+/* ============ STICKY PILL NAVBAR ============ */
+header{position:relative;z-index:100;padding-top:18px}
+.pill-nav{
+  position:sticky;top:14px;
+  width:fit-content;max-width:94%;margin-inline:auto;
+  background:var(--paper);
+  border:var(--border);border-radius:999px;
+  box-shadow:0 4px 0 var(--ink),0 12px 26px rgba(45,45,45,.12);
+  display:flex;align-items:center;gap:clamp(.8rem,2vw,1.6rem);
+  padding:.5rem .7rem .5rem 1.2rem;
+  transition:transform .3s ease;
+}
+.brand{display:flex;align-items:center;gap:.55rem;font-family:var(--font-head);font-weight:600;font-size:1.15rem;letter-spacing:.5px;white-space:nowrap}
+.brand .brand-dot{width:14px;height:14px;background:var(--yellow);border:2px solid var(--ink);border-radius:50%;flex:none}
+.nav-links{display:flex;gap:clamp(.6rem,2vw,1.6rem);align-items:center}
+.nav-links a{
+  text-decoration:none;color:var(--ink);font-weight:600;font-size:1rem;
+  padding:.45rem .8rem;border-radius:999px;min-height:44px;display:flex;align-items:center;
+  transition:background .2s,transform .2s;
+}
+.nav-links a:hover{background:var(--green);transform:translateY(-2px)}
+.nav-cta{
+  font-family:var(--font-head);font-weight:600;font-size:1rem;
+  background:var(--orange);color:var(--ink);text-decoration:none;
+  border:var(--border);border-radius:999px;padding:.5rem 1.2rem;
+  box-shadow:0 4px 0 var(--ink);min-height:44px;display:flex;align-items:center;
+  transition:transform .15s,box-shadow .15s;white-space:nowrap;
+}
+.nav-cta:hover{transform:translateY(-3px);box-shadow:0 7px 0 var(--ink)}
+.nav-cta:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.burger{display:none;background:var(--paper);border:var(--border);border-radius:12px;width:46px;height:46px;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 3px 0 var(--ink)}
+.burger:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.nav-drop{display:none;flex-direction:column;gap:.3rem;width:100%;margin-top:.5rem}
+.nav-drop.open{display:flex}
+.nav-drop a{text-decoration:none;color:var(--ink);font-weight:600;padding:.8rem 1rem;border:var(--border);border-radius:14px;background:var(--paper);min-height:48px;display:flex;align-items:center}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  padding:clamp(4rem,9vw,7rem) 0 clamp(3rem,6vw,5rem);
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.4rem;
+}
+.hero-badge{
+  font-family:var(--font-head);font-weight:600;font-size:clamp(.85rem,1vw,1rem);
+  background:var(--yellow);border:var(--border);border-radius:999px;
+  padding:.45rem 1.2rem;transform:rotate(-2deg);
+  box-shadow:0 3px 0 var(--ink);
+}
+.hero h1{
+  font-size:clamp(2.3rem,3.2rem + 5.5vw,5.2rem);
+  max-width:16ch;
+}
+.h-word{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.h-word>span{display:inline-block;transform:translateY(110%);opacity:0}
+.loaded .h-word>span{animation:wordUp .7s cubic-bezier(.2,.9,.3,1.2) forwards;animation-delay:calc(var(--w)*90ms + 150ms)}
+@keyframes wordUp{to{transform:translateY(0);opacity:1}}
+.hero-sub{max-width:34ch;color:var(--ink);opacity:0;transform:translateY(16px)}
+.loaded .hero-sub{animation:fadeUp .7s ease forwards;animation-delay:.95s}
+.hero-sub strong{background:var(--green);padding:0 .3em;border-radius:8px}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;opacity:0}
+.loaded .hero-ctas{animation:fadeUp .7s ease forwards;animation-delay:1.15s}
+.btn{
+  font-family:var(--font-head);font-weight:600;font-size:clamp(1rem,1vw,1.2rem);
+  border:var(--border);border-radius:var(--radius-btn);
+  padding:.85rem 1.8rem;cursor:pointer;text-decoration:none;color:var(--ink);
+  display:inline-flex;align-items:center;gap:.6rem;min-height:52px;
+  box-shadow:var(--shadow-hard);
+  transition:transform .15s,box-shadow .15s,background .2s;
+}
+.btn-primary{background:var(--orange)}
+.btn-secondary{background:var(--paper)}
+.btn:hover{transform:translateY(-4px);box-shadow:0 8px 0 var(--ink)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+
+/* hero stats */
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;
+  width:min(680px,100%);margin-top:1.5rem;opacity:0;
+}
+.loaded .hero-stats{animation:fadeUp .7s ease forwards;animation-delay:1.35s}
+.stat{
+  background:var(--paper);border:var(--border);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-soft);padding:1.1rem .8rem;position:relative;transition:transform .25s;
+}
+.stat:hover{transform:translateY(-6px) rotate(-1deg)}
+.stat:nth-child(2){transform:rotate(1.2deg)}
+.stat:nth-child(2):hover{transform:translateY(-6px) rotate(0)}
+.stat .num{font-family:var(--font-head);font-weight:700;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1}
+.stat .lbl{font-size:.92rem;color:var(--gray);font-weight:600}
+.stat .pill-tag{position:absolute;top:-12px;left:14px;font-size:.72rem;font-weight:700;background:var(--blue);border:2px solid var(--ink);border-radius:999px;padding:.1rem .6rem}
+
+/* floating decorations */
+.deco{position:absolute;pointer-events:none;z-index:1}
+.deco.float-a{animation:floatA 6s ease-in-out infinite}
+.deco.float-b{animation:floatB 7.5s ease-in-out infinite}
+.deco.float-c{animation:floatA 9s ease-in-out infinite reverse}
+@keyframes floatA{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
+@keyframes floatB{0%,100%{transform:translateY(-8px) rotate(6deg)}50%{transform:translateY(10px) rotate(-5deg)}}
+.twinkle{animation:twinkle 2.6s ease-in-out infinite}
+.twinkle.t2{animation-delay:.9s}.twinkle.t3{animation-delay:1.7s}
+@keyframes twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.72)}}
+.hero>*{position:relative;z-index:2}
+
+/* ============ MARQUEE ============ */
+.marquee{
+  background:var(--yellow);border-top:var(--border);border-bottom:var(--border);
+  overflow:hidden;padding:.75rem 0;transform:rotate(-1deg) scale(1.02);margin:1rem 0 3rem;
+}
+.marquee-track{display:flex;width:max-content;animation:scrollLeft 22s linear infinite}
+.marquee-track span{
+  font-family:var(--font-head);font-weight:600;font-size:1.05rem;letter-spacing:2px;
+  display:flex;align-items:center;gap:1.6rem;padding-right:1.6rem;white-space:nowrap;
+}
+@keyframes scrollLeft{to{transform:translateX(-50%)}}
+
+/* ============ SECTIONS / REVEAL ============ */
+section{margin-bottom:clamp(3rem,7vw,5rem);scroll-margin-top:90px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;transition-delay:calc(var(--i,0)*90ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ MISTAKE CARDS ============ */
+.mistake{
+  background:var(--paper);border:var(--border);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-soft);overflow:hidden;
+}
+.mistake-head{
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  padding:clamp(1.2rem,3vw,2rem);border-bottom:var(--border);
+}
+.mistake:nth-of-type(odd) .mistake-head{background:var(--blue)}
+.mistake:nth-of-type(even) .mistake-head{background:var(--green)}
+.mistake-num{
+  font-family:var(--font-head);font-weight:700;font-size:1rem;
+  background:var(--paper);border:var(--border);border-radius:999px;
+  padding:.35rem 1rem;box-shadow:0 3px 0 var(--ink);white-space:nowrap;
+}
+.mistake-head h2{font-size:clamp(1.45rem,2vw,2.2rem)}
+.mistake-body{padding:clamp(1.2rem,3vw,2rem);display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.pf-card{border:var(--border);border-radius:20px;padding:1.2rem 1.4rem;transition:transform .25s}
+.pf-card:hover{transform:translateY(-5px)}
+.pf-card.problem{background:#FDE8E4}
+.pf-card.fix{background:#E9FBEF}
+.pf-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-head);font-weight:600;font-size:.85rem;border:var(--border);border-radius:999px;padding:.2rem .8rem;margin-bottom:.6rem}
+.problem .pf-tag{background:var(--orange)}
+.fix .pf-tag{background:var(--green)}
+.pf-card p{font-weight:500}
+.impact{margin-top:1rem}
+.impact .bar-label{display:flex;justify-content:space-between;font-size:.85rem;font-weight:700;margin-bottom:.3rem}
+.bar{height:16px;border:var(--border);border-radius:999px;background:var(--paper);overflow:hidden}
+.bar>div{height:100%;width:0;background:repeating-linear-gradient(45deg,var(--green),var(--green) 8px,#7FD3AE 8px,#7FD3AE 16px);transition:width 1.4s cubic-bezier(.2,.8,.3,1);border-right:2px solid var(--ink)}
+
+/* ============ READY-MADE LINES ============ */
+.lines-wrap{padding:0 clamp(1.2rem,3vw,2rem) clamp(1.2rem,3vw,2rem)}
+.lines-title{
+  display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:1rem;
+  font-family:var(--font-head);font-weight:600;font-size:clamp(1.1rem,1.5vw,1.35rem);
+}
+.lines-title .count-badge{background:var(--yellow);border:var(--border);border-radius:999px;padding:.15rem .8rem;font-size:.9rem;box-shadow:0 3px 0 var(--ink)}
+.lines-title .hint{font-family:var(--font-body);font-weight:600;font-size:.9rem;color:var(--gray)}
+.lines-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem}
+.line-card{
+  border:var(--border);border-radius:18px;background:var(--paper);
+  padding:.9rem 1rem;display:flex;gap:.8rem;align-items:center;justify-content:space-between;
+  transition:transform .2s,box-shadow .2s;position:relative;box-shadow:0 3px 0 var(--ink);
+}
+.line-card:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 7px 0 var(--ink)}
+.line-card p{flex:1;font-weight:600;font-size:clamp(.92rem,.9rem + .3vw,1.05rem);overflow-wrap:break-word}
+.line-card .idx{
+  font-family:var(--font-head);font-weight:700;font-size:.8rem;flex:none;
+  width:30px;height:30px;border:var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;background:var(--yellow);
+}
+.copy-btn{
+  flex:none;display:inline-flex;align-items:center;gap:.4rem;cursor:pointer;
+  font-family:var(--font-head);font-weight:600;font-size:.85rem;
+  background:var(--orange);border:var(--border);border-radius:12px;
+  padding:.45rem .8rem;min-height:44px;min-width:44px;
+  box-shadow:0 3px 0 var(--ink);transition:transform .12s,box-shadow .12s,background .2s;
+}
+.copy-btn:hover{transform:translateY(-2px);box-shadow:0 5px 0 var(--ink)}
+.copy-btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.copy-btn.done{background:var(--green)}
+.copy-btn .stamp-pop{animation:stampPop .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes stampPop{0%{transform:scale(.4) rotate(-14deg)}70%{transform:scale(1.25) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
+
+/* ============ QUIZ ============ */
+.quiz-card{
+  background:var(--paper);border:var(--border);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-soft);padding:clamp(1.4rem,4vw,2.6rem);
+  position:relative;overflow:hidden;
+}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.6rem}
+.quiz-top h2{font-size:clamp(1.5rem,2.4vw,2.3rem)}
+.quiz-score{font-family:var(--font-head);font-weight:600;background:var(--blue);border:var(--border);border-radius:999px;padding:.3rem 1rem;box-shadow:0 3px 0 var(--ink)}
+.quiz-dots{display:flex;gap:.5rem;margin:.6rem 0 1.4rem}
+.qdot{width:14px;height:14px;border:var(--border);border-radius:50%;background:var(--paper);transition:background .3s,transform .3s}
+.qdot.now{background:var(--yellow);transform:scale(1.25)}
+.qdot.right{background:var(--green)}
+.q-question{font-size:clamp(1.2rem,1.6vw,1.6rem);font-weight:700;font-family:var(--font-head);margin-bottom:1.1rem}
+.quiz-opts{display:flex;flex-direction:column;gap:.8rem;max-width:640px}
+.opt{
+  text-align:left;font-family:var(--font-body);font-weight:600;font-size:1.05rem;
+  background:var(--paper);border:var(--border);border-radius:16px;
+  padding:.9rem 1.2rem;min-height:56px;cursor:pointer;
+  box-shadow:0 4px 0 var(--ink);transition:transform .15s,box-shadow .15s,background .25s;
+}
+.opt:hover{transform:translateY(-3px);box-shadow:0 7px 0 var(--ink);background:#FFF8E8}
+.opt:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.opt.correct{background:var(--green);animation:optYes .5s}
+.opt.wrong{background:#F6B8AE;animation:shake .45s}
+@keyframes optYes{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.quiz-hint{margin-top:.9rem;font-weight:600;color:#B3543F;min-height:1.5em}
+.quiz-final{text-align:center;padding:1rem 0}
+.quiz-final .big-stamp{
+  display:inline-block;font-family:var(--font-head);font-weight:700;
+  font-size:clamp(2rem,4.5vw,3.4rem);color:#D84315;
+  border:5px solid #D84315;border-radius:18px;padding:.3rem 1.4rem;
+  transform:rotate(-6deg);animation:stampIn .6s cubic-bezier(.2,1.5,.4,1);
+  background:rgba(252,227,77,.25);letter-spacing:2px;
+}
+@keyframes stampIn{0%{transform:scale(2.6) rotate(10deg);opacity:0}60%{transform:scale(.94) rotate(-7deg);opacity:1}100%{transform:scale(1) rotate(-6deg)}}
+.quiz-final p{margin-top:1.2rem;font-weight:600}
+.quiz-reset{margin-top:1.4rem;background:var(--blue)}
+
+/* ============ RECAP CHECKLIST ============ */
+.recap-card{
+  background:var(--paper);border:var(--border);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-soft);padding:clamp(1.4rem,4vw,2.6rem);
+}
+.recap-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;margin-bottom:1.2rem}
+.recap-head h2{font-size:clamp(1.4rem,2.2vw,2.1rem)}
+.recap-count{font-family:var(--font-head);font-weight:600;background:var(--yellow);border:var(--border);border-radius:999px;padding:.3rem 1rem;box-shadow:0 3px 0 var(--ink)}
+.recap-progress{height:22px;border:var(--border);border-radius:999px;background:var(--bg);overflow:hidden;margin-bottom:1.3rem}
+.recap-progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--green),#57C48C);transition:width .5s cubic-bezier(.2,.8,.3,1)}
+.recap-progress>div.full{background:linear-gradient(90deg,var(--green),#3AAE77)}
+.check-item{
+  display:flex;align-items:center;gap:1.15rem;border:var(--border);border-radius:18px;
+  padding:1rem 1.2rem;margin-bottom:.8rem;cursor:pointer;background:var(--paper);
+  transition:background .25s,transform .2s;min-height:64px;box-shadow:0 3px 0 var(--ink);
+}
+.check-item:hover{transform:translateY(-3px)}
+.check-item .box{
+  flex:none;width:34px;height:34px;border:var(--border);border-radius:10px;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;transition:background .2s;
+}
+.check-item .box svg{opacity:0;transform:scale(.3);transition:opacity .2s,transform .3s cubic-bezier(.2,1.6,.4,1)}
+.check-item.checked{background:#E9FBEF}
+.check-item.checked .box{background:var(--green)}
+.check-item.checked .box svg{opacity:1;transform:scale(1)}
+.check-item.checked span{text-decoration:line-through;opacity:.75}
+.check-item span{font-weight:700;font-size:clamp(1rem,1.2vw,1.15rem)}
+.check-pop{animation:checkPop .4s}
+@keyframes checkPop{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+
+/* ============ FOOTER ============ */
+footer{
+  margin-top:2rem;border-top:var(--border);background:var(--paper);
+  padding:clamp(2.5rem,6vw,4rem) 0 2.5rem;text-align:center;
+}
+.footer-brand{
+  font-family:var(--font-head);font-weight:700;font-size:clamp(2rem,6vw,4rem);
+  letter-spacing:2px;display:inline-block;position:relative;
+}
+.footer-brand .underline{height:10px;background:var(--yellow);border:2px solid var(--ink);border-radius:999px;margin-top:.2rem}
+.footer-tag{margin:.8rem 0 1.6rem;font-weight:600;color:var(--gray)}
+.footer-note{font-size:.85rem;color:var(--gray)}
+
+/* ============ CONFETTI ============ */
+.confetti-piece{
+  position:fixed;top:-20px;z-index:300;pointer-events:none;
+  animation:confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  to{transform:translateY(110vh) rotate(720deg);opacity:.9}
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:960px){
+  .mistake-body{grid-template-columns:1fr}
+  .lines-grid{grid-template-columns:1fr}
+  .hero-stats{width:min(560px,100%)}
+}
+@media (max-width:640px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .pill-nav{width:calc(100% - 4%);justify-content:space-between;flex-wrap:wrap}
+  .pill-nav .nav-cta{display:none}
+  .hero h1{max-width:100%}
+  .hero-stats{grid-template-columns:1fr;gap:.8rem}
+  .stat{display:flex;align-items:center;gap:1rem;text-align:left}
+  .stat .pill-tag{position:static}
+  .lines-grid{grid-template-columns:1fr}
+  .line-card{flex-wrap:wrap}
+  .line-card p{flex-basis:100%;order:3}
+  .marquee{transform:rotate(0) scale(1);margin-inline:-4%}
+  .quiz-card .deco{display:none}
+  .quiz-opts{gap:.7rem}
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .h-word>span{transform:none;opacity:1}
+  .hero-sub,.hero-ctas,.hero-stats{opacity:1;transform:none}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div id="scrollbar-top"></div>
+
+<header>
+  <nav class="pill-nav" id="pillNav">
+    <a class="brand" href="#top" style="text-decoration:none;color:inherit">
+      <span class="brand-dot"></span>rawde_vvvvvv
+    </a>
+    <div class="nav-links">
+      <a href="#m1">Mistake 1</a>
+      <a href="#m2">Mistake 2</a>
+      <a href="#m3">Mistake 3</a>
+      <a href="#recap">Recap</a>
+    </div>
+    <a class="nav-cta" href="#quiz">Quiz Khelo</a>
+    <button class="burger" id="burgerBtn" aria-label="Menu kholo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="nav-drop" id="navDrop">
+      <a href="#m1">Mistake 1 — Hook</a>
+      <a href="#m2">Mistake 2 — Caption</a>
+      <a href="#m3">Mistake 3 — CTA</a>
+      <a href="#quiz">Quiz Khelo</a>
+      <a href="#recap">Recap</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Intro">
+    <!-- floating kawaii decorations -->
+    <svg class="deco float-a" style="top:8%;left:4%" width="54" height="54" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.2L12 12l-2.4-2.8L12 2z" fill="#FCE34D" stroke="#2D2D2D" stroke-width="1.6"/><circle cx="12" cy="18" r="4" fill="#FCE34D" stroke="#2D2D2D" stroke-width="1.6"/></svg>
+    <svg class="deco float-b twinkle" style="top:16%;right:6%" width="46" height="46" viewBox="0 0 24 24" fill="none"><path d="M12 1l2.5 8.5L23 12l-8.5 2.5L12 23l-2.5-8.5L1 12l8.5-2.5L12 1z" fill="#F39C4D" stroke="#2D2D2D" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <svg class="deco float-c" style="bottom:22%;left:8%" width="64" height="44" viewBox="0 0 34 24" fill="none"><path d="M2 16c4-10 10-14 16-13" stroke="#2D2D2D" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="4 5"/><path d="M14 1l5 2-3 4" fill="#FCE34D" stroke="#2D2D2D" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <svg class="deco float-a twinkle t2" style="top:52%;right:9%" width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3 3-9z" fill="#A8E6CF" stroke="#2D2D2D" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <svg class="deco float-b twinkle t3" style="bottom:34%;right:14%" width="30" height="30" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#B2EBF2" stroke="#2D2D2D" stroke-width="1.8"/><path d="M8 14.5c1.2 1.4 2.6 2 4 2s2.8-.6 4-2" stroke="#2D2D2D" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="9.5" r="1.4" fill="#2D2D2D"/><circle cx="15" cy="9.5" r="1.4" fill="#2D2D2D"/></svg>
+    <svg class="deco float-c twinkle" style="top:6%;right:26%" width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" fill="#FCE34D" stroke="#2D2D2D" stroke-width="1.6" stroke-linejoin="round"/></svg>
+
+    <span class="hero-badge">by rawde_vvvvvv</span>
+    <h1 id="heroH1">Tumhari reels flop nahi horiin</h1>
+    <p class="hero-sub">Tumse <strong>teen choti mistakes</strong> horahi hain jo reach khud maar rahi hain. Aaj woh teeno bataunga — <strong>aur fix bhi</strong>.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#m1">
+        Teeno Mistakes Dekho
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.6" stroke-linecap="round"><path d="M12 4v14m0 0l-6-6m6 6l6-6"/></svg>
+      </a>
+      <a class="btn btn-secondary" href="#quiz">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 5h11a1 1 0 011 1v12a1 1 0 01-1 1H8L2 12l6-7z" fill="#FCE34D" stroke="#2D2D2D" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 9.5l4 2.5-4 2.5v-5z" fill="#2D2D2D"/></svg>
+        Quiz: Reel Ready?
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat reveal">
+        <span class="pill-tag">GALTIIYAN</span>
+        <div class="num" data-count="3">0</div>
+        <div class="lbl">choti mistakes, reach maar rahi</div>
+      </div>
+      <div class="stat reveal" style="--i:1">
+        <span class="pill-tag">HOOK</span>
+        <div class="num" data-count="2">0</div>
+        <div class="lbl">second — bas itna hi time hai</div>
+      </div>
+      <div class="stat reveal" style="--i:2">
+        <span class="pill-tag">READY-MADE</span>
+        <div class="num" data-count="30">0</div>
+        <div class="lbl">Hinglish lines — hooks, captions, CTAs</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>HOOK &bull; CAPTION &bull; CTA &bull; REACH &bull; WATCH TIME &bull; ALGORITHM &bull; SAVE &bull; SHARE &bull; FOLLOW &bull; </span>
+      <span>HOOK &bull; CAPTION &bull; CTA &bull; REACH &bull; WATCH TIME &bull; ALGORITHM &bull; SAVE &bull; SHARE &bull; FOLLOW &bull; </span>
+    </div>
+  </div>
+
+  <!-- ============ MISTAKE 1 ============ -->
+  <section id="m1" aria-label="Mistake ek">
+    <article class="mistake reveal">
+      <div class="mistake-head">
+        <span class="mistake-num">MISTAKE 01</span>
+        <h2>Pehle 2 second mein hook nahi hona</h2>
+      </div>
+      <div class="mistake-body">
+        <div class="pf-card problem reveal">
+          <span class="pf-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+            GALAT
+          </span>
+          <p>Pehle 2 second mein hook nahi hona — boring start dekh ke log turant swipe kar dete hain.</p>
+        </div>
+        <div class="pf-card fix reveal" style="--i:1">
+          <span class="pf-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg>
+            FIX
+          </span>
+          <p>Seedha result ya ek shocking line se start karo — <strong>"hii guys" mat bolo</strong>.</p>
+          <div class="impact">
+            <div class="bar-label"><span>Hook-strong opening</span><span>100%</span></div>
+            <div class="bar"><div data-bar="100"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lines-wrap">
+        <div class="lines-title reveal">
+          10 Ready-Made Hooks
+          <span class="count-badge">COPY & PASTE</span>
+          <span class="hint">— tap karke copy karo, seedha apni reel mein use karo</span>
+        </div>
+        <div class="lines-grid">
+          <div class="line-card reveal"><span class="idx">1</span><p>Agar tumhari reels flop horiin hain, toh ye 30 second tumhari reach badal denge</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:1"><span class="idx">2</span><p>Ye ek galti tumhari saari reels ka reach kha rahi hai — proof andar hai</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:2"><span class="idx">3</span><p>Ruko! "hii guys" bolne se pehle ye 5 second sun lo</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:3"><span class="idx">4</span><p>Tumhare competitor ko views kyun mil rahe hain aur tumhe nahi? Aaj reveal karunga</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal"><span class="idx">5</span><p>Instagram tumhari reel kisi ko dikhata hi nahi — kyun? Reason aaj bataunga</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:1"><span class="idx">6</span><p>1 lakh views wali reel ka formula — sirf 3 simple steps</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:2"><span class="idx">7</span><p>Ye cheez mat karo warna tumhari reach hamesha ke liye gir jayegi</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:3"><span class="idx">8</span><p>Sabse pehle result dikhata hoon, baad mein samjhata hoon — rok ke dekho</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal"><span class="idx">9</span><p>Agar tum creator ho aur ye video miss ki, toh agle month bhi same views pe rahoge</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:1"><span class="idx">10</span><p>Maine 30 din mein followers double kaise kiye — bina ek rupaya lagaye</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ MISTAKE 2 ============ -->
+  <section id="m2" aria-label="Mistake do">
+    <article class="mistake reveal">
+      <div class="mistake-head">
+        <span class="mistake-num">MISTAKE 02</span>
+        <h2>Caption mein hi puri baat bata dena</h2>
+      </div>
+      <div class="mistake-body">
+        <div class="pf-card problem reveal">
+          <span class="pf-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+            GALAT
+          </span>
+          <p>Caption mein hi puri baat bata dena — isse log video dobara nahi dekhte aur watch time gir jaata hai.</p>
+        </div>
+        <div class="pf-card fix reveal" style="--i:1">
+          <span class="pf-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg>
+            FIX
+          </span>
+          <p>Caption sirf <strong>curiosity badhaye</strong> — poori info video ke andar ho.</p>
+          <div class="impact">
+            <div class="bar-label"><span>Curiosity-first caption</span><span>100%</span></div>
+            <div class="bar"><div data-bar="100"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lines-wrap">
+        <div class="lines-title reveal">
+          10 Ready-Made Captions
+          <span class="count-badge">COPY & PASTE</span>
+          <span class="hint">— sirf curiosity, poori baat video ke andar</span>
+        </div>
+        <div class="lines-grid">
+          <div class="line-card reveal"><span class="idx">1</span><p>Is video ke end mein woh cheez hai jo 99% creators nahi jaante</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:1"><span class="idx">2</span><p>POV: tum roz reel daalte ho, views wahi ke wahi hain</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:2"><span class="idx">3</span><p>Watch time badhane ka asli tarika? Video ke andar chhupa hai</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:3"><span class="idx">4</span><p>Ye caption poori baat nahi bata raha... poora breakdown video mein hai</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal"><span class="idx">5</span><p>3 mistakes, 1 solution — swipe nahi karna, end tak dekhna</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:1"><span class="idx">6</span><p>Is reel ka pehla hi second tumhari reach decide kar raha hai</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:2"><span class="idx">7</span><p>Save karlo — agli reel banane se pehle kaam aayega</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:3"><span class="idx">8</span><p>Ye baat maine bahut late pata chali — tum time se jaan lo</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal"><span class="idx">9</span><p>Algorithm tumhe favour kaise karega? Hint: video ke andar</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:1"><span class="idx">10</span><p>Tumhari reel ka hook aur reach — dono ka connection andar explained hai</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ MISTAKE 3 ============ -->
+  <section id="m3" aria-label="Mistake teen">
+    <article class="mistake reveal">
+      <div class="mistake-head">
+        <span class="mistake-num">MISTAKE 03</span>
+        <h2>CTA weak ya missing hona</h2>
+      </div>
+      <div class="mistake-body">
+        <div class="pf-card problem reveal">
+          <span class="pf-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+            GALAT
+          </span>
+          <p>CTA weak ya missing hona — clear CTA na ho toh algorithm ko engage-worthy signal hi nahi milta.</p>
+        </div>
+        <div class="pf-card fix reveal" style="--i:1">
+          <span class="pf-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg>
+            FIX
+          </span>
+          <p>Har video ke end mein <strong>ek clear, specific CTA</strong> do.</p>
+          <div class="impact">
+            <div class="bar-label"><span>Clear & specific CTA</span><span>100%</span></div>
+            <div class="bar"><div data-bar="100"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lines-wrap">
+        <div class="lines-title reveal">
+          10 Ready-Made CTAs
+          <span class="count-badge">COPY & PASTE</span>
+          <span class="hint">— clear, specific aur engage-worthy</span>
+        </div>
+        <div class="lines-grid">
+          <div class="line-card reveal"><span class="idx">1</span><p>Ye video kisi aise dost ko bhejo jo reels banata hai</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:1"><span class="idx">2</span><p>Save karke rakho — next reel banane se pehle dubara padhna</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:2"><span class="idx">3</span><p>Follow karo rawde_vvvvvv — roz aisi reels-fixing videos aati hain</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:3"><span class="idx">4</span><p>Helpful laga? Ek share kar do — muft ka hai</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal"><span class="idx">5</span><p>Part 2 chahiye? "YES" comment karo</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:1"><span class="idx">6</span><p>Aaj hi apni next reel mein ye 3 fixes lagao — difference khud dikhega</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:2"><span class="idx">7</span><p>Double tap karo agar tumne bhi "hii guys" se start kiya tha</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:3"><span class="idx">8</span><p>Apni sabse flop reel ka reason comment mein batao</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal"><span class="idx">9</span><p>Story pe share karo — tumhare creator friends ko bhi pata chale</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+          <div class="line-card reveal" style="--i:1"><span class="idx">10</span><p>Follow + bell icon dabao — warna next video miss ho jayegi</p><button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</button></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz" aria-label="Quiz">
+    <div class="quiz-card reveal">
+      <svg class="deco float-a twinkle" style="bottom:24px;right:22px;position:absolute" width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3 3-9z" fill="#FCE34D" stroke="#2D2D2D" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <div class="quiz-top">
+        <h2>Quiz: Tumhari reel ready hai?</h2>
+        <span class="quiz-score">Score: <span id="quizScore">0</span>/3</span>
+      </div>
+      <div class="quiz-dots" id="quizDots">
+        <span class="qdot now"></span><span class="qdot"></span><span class="qdot"></span>
+      </div>
+      <div id="quizBody">
+        <p class="q-question" id="quizQ"></p>
+        <div class="quiz-opts" id="quizOpts"></div>
+        <p class="quiz-hint" id="quizHint"></p>
+      </div>
+      <div id="quizFinal" class="quiz-final" style="display:none">
+        <span class="big-stamp">REEL READY!</span>
+        <p>Teeno fixes clear hain — ab bas apni next reel mein lagane hain.</p>
+        <button class="btn quiz-reset" id="quizReset">Dobara Khelo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RECAP CHECKLIST ============ -->
+  <section id="recap" aria-label="Recap">
+    <div class="recap-card reveal">
+      <div class="recap-head">
+        <h2>Ab bas teen cheezein yaad rakhna</h2>
+        <span class="recap-count"><span id="recapNum">0</span>/3 done</span>
+      </div>
+      <div class="recap-progress"><div id="recapBar"></div></div>
+      <div class="check-item" data-check>
+        <span class="box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg></span>
+        <span>Pehle 2 second mein hook — "hii guys" nahi</span>
+      </div>
+      <div class="check-item" data-check>
+        <span class="box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg></span>
+        <span>Caption sirf curiosity badhaye — poori info video ke andar</span>
+      </div>
+      <div class="check-item" data-check>
+        <span class="box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg></span>
+        <span>End mein ek clear, specific CTA</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-brand reveal">rawde_vvvvvv<div class="underline"></div></div>
+  <p class="footer-tag reveal" style="--i:1">Reels theek hongi — reach apne aap aayegi.</p>
+  <p class="footer-note reveal" style="--i:2">Hook &bull; Caption &bull; CTA — teeno fix, har video mein.</p>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- hero staggered words ---------- */
+  var h1 = document.getElementById('heroH1');
+  var words = h1.textContent.trim().split(/\s+/);
+  h1.innerHTML = words.map(function(w,i){
+    return '<span class="h-word"><span style="--w:'+i+'">'+w+'</span></span>';
+  }).join(' ');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('loaded'); }); });
+
+  /* ---------- scroll progress bar ---------- */
+  var bar = document.getElementById('scrollbar-top');
+  function onScroll(){
+    var h = document.documentElement;
+    var p = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+    bar.style.width = (p*100).toFixed(2)+'%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- mobile nav ---------- */
+  var burger = document.getElementById('burgerBtn');
+  var drop = document.getElementById('navDrop');
+  burger.addEventListener('click', function(){ drop.classList.toggle('open'); });
+  drop.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ drop.classList.remove('open'); }); });
+
+  /* ---------- reveal on scroll ---------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* ---------- count-up numbers ---------- */
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target, target = parseInt(el.dataset.count,10);
+      cio.unobserve(el);
+      if(reduce){ el.textContent = target; return; }
+      var t0 = null;
+      function step(t){
+        if(!t0) t0 = t;
+        var p = Math.min((t - t0)/900, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1-p,3)));
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, {threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+  /* ---------- growing progress bars ---------- */
+  var bio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      bio.unobserve(el);
+      requestAnimationFrame(function(){ el.style.width = el.dataset.bar + '%'; });
+    });
+  }, {threshold:.6});
+  document.querySelectorAll('[data-bar]').forEach(function(el){ bio.observe(el); });
+
+  /* ---------- copy buttons ---------- */
+  function copyText(txt, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(cb, function(){ legacy(txt); cb(); });
+    } else { legacy(txt); cb(); }
+  }
+  function legacy(txt){
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(err){}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('.line-card');
+      var txt = card.querySelector('p').textContent;
+      copyText(txt, function(){
+        btn.classList.add('done');
+        var label = btn.innerHTML;
+        btn.innerHTML = '<span class="stamp-pop">Copy ho gaya!</span>';
+        setTimeout(function(){ btn.classList.remove('done'); btn.innerHTML = label; }, 1600);
+      });
+    });
+  });
+
+  /* ---------- confetti ---------- */
+  var COLORS = ['#FCE34D','#F39C4D','#A8E6CF','#B2EBF2','#2D2D2D'];
+  function confetti(){
+    if(reduce) return;
+    for(var i=0;i<70;i++){
+      var c = document.createElement('div');
+      c.className = 'confetti-piece';
+      var s = 6 + Math.random()*8;
+      c.style.cssText = 'left:'+(Math.random()*100)+'vw;width:'+s+'px;height:'+(s*.6)+'px;background:'+COLORS[i%COLORS.length]+';border:1.5px solid #2D2D2D;border-radius:3px;animation-duration:'+(1.8+Math.random()*1.8)+'s;animation-delay:'+(Math.random()*.4)+'s;transform:rotate('+Math.random()*360+'deg)';
+      document.body.appendChild(c);
+      (function(el){ setTimeout(function(){ el.remove(); }, 4200); })(c);
+    }
+  }
+
+  /* ---------- quiz ---------- */
+  var QUESTIONS = [
+    {
+      q: '1. Tumhari reel ka pehla second kaisa hona chahiye?',
+      opts: ['"Hii guys" se greetings', 'Seedha result ya shocking line', 'Lamba intro — context pehle'],
+      a: 1,
+      hint: 'Yaad karo: pehle 2 second mein hook nahi hua toh log turant swipe kar dete hain.'
+    },
+    {
+      q: '2. Caption mein kya hona chahiye?',
+      opts: ['Poori baat — sab kuch caption mein hi', 'Kuch nahi, khali chhod do', 'Sirf curiosity — poori info video ke andar'],
+      a: 2,
+      hint: 'Caption mein puri baat bata di toh log video dobara nahi dekhte, watch time gira.'
+    },
+    {
+      q: '3. Video ke end mein kya do?',
+      opts: ['Kuch nahi — bas khatam', 'Ek clear, specific CTA', 'Sirf "support karo" bol dena'],
+      a: 1,
+      hint: 'Clear CTA ke bina algorithm ko engage-worthy signal hi nahi milta.'
+    }
+  ];
+  var qi = 0, score = 0;
+  var qEl = document.getElementById('quizQ'), oEl = document.getElementById('quizOpts');
+  var hintEl = document.getElementById('quizHint'), scoreEl = document.getElementById('quizScore');
+  var dots = document.querySelectorAll('#quizDots .qdot');
+  var bodyEl = document.getElementById('quizBody'), finalEl = document.getElementById('quizFinal');
+
+  function renderQ(){
+    var item = QUESTIONS[qi];
+    qEl.textContent = item.q;
+    hintEl.textContent = '';
+    oEl.innerHTML = '';
+    dots.forEach(function(d,i){
+      d.classList.toggle('now', i===qi);
+      d.classList.remove('right');
+    });
+    item.opts.forEach(function(opt, idx){
+      var b = document.createElement('button');
+      b.className = 'opt'; b.type = 'button'; b.textContent = opt;
+      b.addEventListener('click', function(){ pick(idx, b); });
+      oEl.appendChild(b);
+    });
+  }
+  var SAHI = [
+    'Boring start = turant swipe. Seedha result se start karo.',
+    'Poori baat video ke andar — watch time safe.',
+    'Clear CTA = algorithm ko engage-worthy signal milta hai.'
+  ];
+  function pick(idx, btn){
+    var item = QUESTIONS[qi];
+    var btns = oEl.querySelectorAll('.opt');
+    btns.forEach(function(b){ b.disabled = true; b.style.cursor = 'default'; });
+    if(idx === item.a){
+      btn.classList.add('correct');
+      dots[qi].classList.add('right');
+      score++; scoreEl.textContent = score;
+      hintEl.textContent = 'Sahi! ' + SAHI[qi];
+      hintEl.style.color = '#2E7D4F';
+      setTimeout(function(){
+        qi++;
+        if(qi < QUESTIONS.length){ renderQ(); }
+        else { showFinal(); }
+      }, 850);
+    } else {
+      btn.classList.add('wrong');
+      setTimeout(function(){ btn.classList.remove('wrong'); btn.disabled = false; btn.style.cursor='pointer'; }, 500);
+      btns.forEach(function(b){ if(b!==btn){ b.disabled = false; b.style.cursor='pointer'; } });
+      hintEl.textContent = 'Hint: ' + item.hint;
+      hintEl.style.color = '#B3543F';
+    }
+  }
+  function showFinal(){
+    bodyEl.style.display = 'none';
+    finalEl.style.display = 'block';
+    confetti();
+  }
+  document.getElementById('quizReset').addEventListener('click', function(){
+    qi = 0; score = 0; scoreEl.textContent = '0';
+    finalEl.style.display = 'none';
+    bodyEl.style.display = 'block';
+    renderQ();
+  });
+  renderQ();
+
+  /* ---------- recap checklist ---------- */
+  var items = document.querySelectorAll('[data-check]');
+  var rNum = document.getElementById('recapNum'), rBar = document.getElementById('recapBar');
+  function updateRecap(){
+    var n = document.querySelectorAll('[data-check].checked').length;
+    rNum.textContent = n;
+    rBar.style.width = (n/3*100)+'%';
+    rBar.classList.toggle('full', n===3);
+    if(n===3){ confetti(); }
+  }
+  items.forEach(function(el){
+    el.setAttribute('role','checkbox');
+    el.setAttribute('tabindex','0');
+    function toggle(){
+      el.classList.toggle('checked');
+      el.classList.add('check-pop');
+      setTimeout(function(){ el.classList.remove('check-pop'); }, 420);
+      el.setAttribute('aria-checked', el.classList.contains('checked'));
+      updateRecap();
+    }
+    el.addEventListener('click', toggle);
+    el.addEventListener('keydown', function(e){
+      if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle(); }
+    });
+  });
+
+  /* ---------- touch: quiz + checklist need nothing extra (buttons are 44px+) ---------- */
+})();
+</script>
+</body>
+</html>
