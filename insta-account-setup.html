@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rawde_vvvvvv — Instagram Setup Prompt Pack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#D1E8E2;
+  --paper:#FFFFFF;
+  --ink:#2D2D2D;
+  --gray:#8E8E8E;
+  --yellow:#FCE34D;
+  --orange:#F39C4D;
+  --green:#A8E6CF;
+  --blue:#B2EBF2;
+  --radius-card:26px;
+  --radius-btn:16px;
+  --border:2px solid var(--ink);
+  --shadow-soft:0 10px 30px rgba(45,45,45,.10);
+  --shadow-hard:0 5px 0 var(--ink);
+  --font-head:'Fredoka',sans-serif;
+  --font-body:'Baloo 2',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background-color:var(--bg);
+  background-image:radial-gradient(rgba(45,45,45,.06) 1.5px, transparent 1.5px);
+  background-size:26px 26px;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+img,svg{display:block}
+main{width:min(1120px,92%);margin-inline:auto}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.15;font-weight:600}
+p{font-size:clamp(1rem,.9rem + .6vw,1.15rem)}
+
+/* ============ SCROLL PROGRESS BAR ============ */
+#scrollbar-top{
+  position:fixed;top:0;left:0;height:6px;width:0%;
+  background:var(--orange);border-right:3px solid var(--ink);
+  z-index:200;transition:width .1s linear;
+}
+
+/* ============ STICKY PILL NAVBAR ============ */
+header{position:relative;z-index:100;padding-top:18px}
+.pill-nav{
+  position:sticky;top:14px;
+  width:fit-content;max-width:94%;margin-inline:auto;
+  background:var(--paper);
+  border:var(--border);border-radius:999px;
+  box-shadow:0 4px 0 var(--ink),0 12px 26px rgba(45,45,45,.12);
+  display:flex;align-items:center;gap:clamp(.8rem,2vw,1.6rem);
+  padding:.5rem .7rem .5rem 1.2rem;
+  transition:transform .3s ease;
+}
+.brand{display:flex;align-items:center;gap:.55rem;font-family:var(--font-head);font-weight:600;font-size:1.15rem;letter-spacing:.5px;white-space:nowrap;color:inherit;text-decoration:none}
+.brand .brand-dot{width:14px;height:14px;background:var(--yellow);border:2px solid var(--ink);border-radius:50%;flex:none}
+.nav-links{display:flex;gap:clamp(.5rem,1.6vw,1.4rem);align-items:center}
+.nav-links a{
+  text-decoration:none;color:var(--ink);font-weight:600;font-size:.98rem;
+  padding:.45rem .75rem;border-radius:999px;min-height:44px;display:flex;align-items:center;
+  transition:background .2s,transform .2s;white-space:nowrap;
+}
+.nav-links a:hover{background:var(--green);transform:translateY(-2px)}
+.nav-cta{
+  font-family:var(--font-head);font-weight:600;font-size:1rem;
+  background:var(--orange);color:var(--ink);text-decoration:none;
+  border:var(--border);border-radius:999px;padding:.5rem 1.2rem;
+  box-shadow:0 4px 0 var(--ink);min-height:44px;display:flex;align-items:center;
+  transition:transform .15s,box-shadow .15s;white-space:nowrap;
+}
+.nav-cta:hover{transform:translateY(-3px);box-shadow:0 7px 0 var(--ink)}
+.nav-cta:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.burger{display:none;background:var(--paper);border:var(--border);border-radius:12px;width:46px;height:46px;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 3px 0 var(--ink)}
+.burger:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.nav-drop{display:none;flex-direction:column;gap:.3rem;width:100%;margin-top:.5rem}
+.nav-drop.open{display:flex}
+.nav-drop a{text-decoration:none;color:var(--ink);font-weight:600;padding:.8rem 1rem;border:var(--border);border-radius:14px;background:var(--paper);min-height:48px;display:flex;align-items:center}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  padding:clamp(4rem,9vw,7rem) 0 clamp(3rem,6vw,5rem);
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.4rem;
+}
+.hero-badge{
+  font-family:var(--font-head);font-weight:600;font-size:clamp(.85rem,1vw,1rem);
+  background:var(--yellow);border:var(--border);border-radius:999px;
+  padding:.45rem 1.2rem;transform:rotate(-2deg);
+  box-shadow:0 3px 0 var(--ink);
+}
+.hero h1{
+  font-size:clamp(2rem,2.6rem + 5vw,4.8rem);
+  max-width:18ch;
+  line-height:1.25;
+}
+.hero h1.settled .h-word{overflow:visible}
+.h-word{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.16em;margin-bottom:-.16em}
+.h-word>span{display:inline-block;transform:translateY(110%);opacity:0}
+.loaded .h-word>span{animation:wordUp .7s cubic-bezier(.2,.9,.3,1.2) forwards;animation-delay:calc(var(--w)*70ms + 150ms)}
+@keyframes wordUp{to{transform:translateY(0);opacity:1}}
+.hero-sub{max-width:38ch;color:var(--ink);opacity:0;transform:translateY(16px)}
+.loaded .hero-sub{animation:fadeUp .7s ease forwards;animation-delay:.9s}
+.hero-sub strong{background:var(--green);padding:0 .3em;border-radius:8px}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;opacity:0}
+.loaded .hero-ctas{animation:fadeUp .7s ease forwards;animation-delay:1.1s}
+.btn{
+  font-family:var(--font-head);font-weight:600;font-size:clamp(1rem,1vw,1.2rem);
+  border:var(--border);border-radius:var(--radius-btn);
+  padding:.85rem 1.8rem;cursor:pointer;text-decoration:none;color:var(--ink);
+  display:inline-flex;align-items:center;gap:.6rem;min-height:52px;
+  box-shadow:var(--shadow-hard);
+  transition:transform .15s,box-shadow .15s,background .2s;
+}
+.btn-primary{background:var(--orange)}
+.btn-secondary{background:var(--paper)}
+.btn:hover{transform:translateY(-4px);box-shadow:0 8px 0 var(--ink)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+
+/* hero stats */
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;
+  width:min(680px,100%);margin-top:1.5rem;opacity:0;
+}
+.loaded .hero-stats{animation:fadeUp .7s ease forwards;animation-delay:1.3s}
+.stat{
+  background:var(--paper);border:var(--border);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-soft);padding:1.1rem .8rem;position:relative;transition:transform .25s;
+}
+.stat:hover{transform:translateY(-6px)}
+.stat .num{font-family:var(--font-head);font-weight:700;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1}
+.stat .lbl{font-size:.92rem;color:var(--gray);font-weight:600}
+.stat .pill-tag{display:inline-block;margin-bottom:.45rem;font-size:.72rem;font-weight:700;background:var(--blue);border:2px solid var(--ink);border-radius:999px;padding:.1rem .6rem}
+
+/* floating decorations */
+.deco{position:absolute;pointer-events:none;z-index:1}
+.deco.float-a{animation:floatA 6s ease-in-out infinite}
+.deco.float-b{animation:floatB 7.5s ease-in-out infinite}
+.deco.float-c{animation:floatA 9s ease-in-out infinite reverse}
+@keyframes floatA{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
+@keyframes floatB{0%,100%{transform:translateY(-8px) rotate(6deg)}50%{transform:translateY(10px) rotate(-5deg)}}
+.twinkle{animation:twinkle 2.6s ease-in-out infinite}
+.twinkle.t2{animation-delay:.9s}.twinkle.t3{animation-delay:1.7s}
+@keyframes twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.72)}}
+.hero>*{position:relative;z-index:2}
+
+/* ============ MARQUEE ============ */
+.marquee{
+  background:var(--yellow);border-top:var(--border);border-bottom:var(--border);
+  overflow:hidden;padding:.75rem 0;width:100vw;margin:1.5rem 0 3rem;margin-left:calc(50% - 50vw);
+}
+.marquee-track{display:flex;width:max-content;animation:scrollLeft 24s linear infinite}
+.marquee-track span{
+  font-family:var(--font-head);font-weight:600;font-size:1.05rem;letter-spacing:2px;
+  display:flex;align-items:center;gap:1.6rem;padding-right:1.6rem;white-space:nowrap;
+}
+@keyframes scrollLeft{to{transform:translateX(-50%)}}
+
+/* ============ SECTIONS / REVEAL ============ */
+section{margin-bottom:clamp(3rem,7vw,5rem);scroll-margin-top:90px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;transition-delay:calc(var(--i,0)*90ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ HOW IT WORKS ============ */
+.how-card{
+  background:var(--paper);border:var(--border);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-soft);padding:clamp(1.4rem,4vw,2.4rem);
+}
+.how-head{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.how-head h2{font-size:clamp(1.4rem,2.2vw,2.1rem)}
+.how-head .tag{background:var(--yellow);border:var(--border);border-radius:999px;padding:.25rem .9rem;font-family:var(--font-head);font-weight:600;font-size:.85rem;box-shadow:0 3px 0 var(--ink)}
+.how-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.step{
+  border:var(--border);border-radius:20px;padding:1.2rem;position:relative;
+  transition:transform .25s;background:var(--paper);box-shadow:0 4px 0 var(--ink);
+}
+.step:hover{transform:translateY(-6px)}
+.step:nth-child(1){background:var(--blue)}
+.step:nth-child(2){background:var(--green)}
+.step:nth-child(3){background:var(--yellow)}
+.step .s-num{
+  font-family:var(--font-head);font-weight:700;font-size:.85rem;
+  width:34px;height:34px;border:var(--border);border-radius:50%;
+  background:var(--paper);display:flex;align-items:center;justify-content:center;margin-bottom:.7rem;
+}
+.step h3{font-size:1.15rem;margin-bottom:.35rem}
+.step p{font-size:.98rem;font-weight:500}
+.step em{font-style:normal;font-weight:700;background:var(--paper);border-radius:6px;padding:0 .25em;white-space:nowrap}
+
+/* ============ PROMPT SECTIONS ============ */
+.prompt-section{
+  background:var(--paper);border:var(--border);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-soft);overflow:hidden;
+}
+.ps-head{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:clamp(1.2rem,3vw,2rem);border-bottom:var(--border)}
+.prompt-section:nth-of-type(4n+1) .ps-head{background:var(--blue)}
+.prompt-section:nth-of-type(4n+2) .ps-head{background:var(--green)}
+.prompt-section:nth-of-type(4n+3) .ps-head{background:var(--yellow)}
+.prompt-section:nth-of-type(4n+4) .ps-head{background:#FBD9C0}
+.ps-num{
+  font-family:var(--font-head);font-weight:700;font-size:1rem;
+  background:var(--paper);border:var(--border);border-radius:999px;
+  padding:.35rem 1rem;box-shadow:0 3px 0 var(--ink);white-space:nowrap;
+}
+.ps-head h2{font-size:clamp(1.35rem,2vw,2.1rem)}
+.ps-head .ps-count{margin-left:auto;font-family:var(--font-head);font-weight:600;font-size:.85rem;background:var(--paper);border:var(--border);border-radius:999px;padding:.25rem .8rem}
+.ps-body{padding:clamp(1.2rem,3vw,2rem);display:flex;flex-direction:column;gap:1.1rem}
+.ps-intro{color:var(--ink);font-weight:500;max-width:70ch}
+.prompt-card{
+  border:var(--border);border-radius:20px;background:#FFFDF4;
+  padding:clamp(1rem,2.5vw,1.5rem);display:flex;flex-direction:column;gap:.9rem;
+  transition:transform .25s,box-shadow .25s;box-shadow:0 4px 0 var(--ink);
+}
+.prompt-card:hover{transform:translateY(-5px);box-shadow:0 8px 0 var(--ink)}
+.prompt-card .p-tag{
+  display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+}
+.p-num{
+  font-family:var(--font-head);font-weight:600;font-size:.8rem;
+  background:var(--orange);border:var(--border);border-radius:999px;padding:.15rem .8rem;
+  box-shadow:0 2px 0 var(--ink);
+}
+.p-title{font-family:var(--font-head);font-weight:600;font-size:1.08rem}
+.prompt-text{
+  font-size:clamp(.95rem,.9rem + .35vw,1.08rem);font-weight:500;line-height:1.7;
+  white-space:pre-line;overflow-wrap:break-word;
+}
+.prompt-text em{
+  font-style:normal;font-weight:700;background:var(--yellow);
+  border-radius:6px;padding:0 .2em;
+}
+.copy-btn{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:.45rem;cursor:pointer;
+  font-family:var(--font-head);font-weight:600;font-size:.9rem;
+  background:var(--orange);border:var(--border);border-radius:12px;
+  padding:.5rem 1rem;min-height:44px;
+  box-shadow:0 3px 0 var(--ink);transition:transform .12s,box-shadow .12s,background .2s;
+}
+.copy-btn:hover{transform:translateY(-2px);box-shadow:0 5px 0 var(--ink)}
+.copy-btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.copy-btn.done{background:var(--green)}
+.copy-btn .stamp-pop{animation:stampPop .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes stampPop{0%{transform:scale(.4) rotate(-14deg)}70%{transform:scale(1.25) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
+
+/* ============ HINGLISH TOGGLE ============ */
+.toggle-card{
+  background:var(--paper);border:var(--border);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-soft);padding:clamp(1.4rem,4vw,2.4rem);
+  display:flex;align-items:center;gap:clamp(1rem,3vw,2rem);flex-wrap:wrap;
+}
+.toggle-card .t-left{flex:1;min-width:260px}
+.toggle-card h2{font-size:clamp(1.4rem,2.2vw,2rem);margin-bottom:.4rem}
+.toggle-card .t-left p{font-weight:500;max-width:55ch}
+.toggle-card .t-left strong{background:var(--yellow);padding:0 .3em;border-radius:8px;border:2px solid var(--ink)}
+.switch-wrap{display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.switch{
+  position:relative;width:86px;height:46px;flex:none;cursor:pointer;
+}
+.switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.slider{
+  position:absolute;inset:0;background:var(--paper);border:var(--border);border-radius:999px;
+  box-shadow:0 4px 0 var(--ink);transition:background .3s;
+}
+.slider::before{
+  content:"";position:absolute;left:5px;top:5px;width:32px;height:32px;
+  background:var(--orange);border:var(--border);border-radius:50%;
+  transition:transform .3s cubic-bezier(.2,1.2,.4,1.2),background .3s;
+}
+.switch input:checked + .slider{background:var(--green)}
+.switch input:checked + .slider::before{transform:translateX(40px);background:var(--yellow)}
+.switch input:focus-visible + .slider{outline:3px solid var(--orange);outline-offset:3px}
+.t-state{font-family:var(--font-head);font-weight:600;font-size:.92rem;background:var(--paper);border:var(--border);border-radius:999px;padding:.3rem .9rem;box-shadow:0 3px 0 var(--ink);text-align:center;max-width:100%}
+.t-state.on{background:var(--green)}
+.big-stamp{
+  display:inline-block;font-family:var(--font-head);font-weight:700;
+  font-size:clamp(1.6rem,3.5vw,2.6rem);color:#D84315;
+  border:5px solid #D84315;border-radius:18px;padding:.25rem 1.2rem;
+  transform:rotate(-6deg);background:rgba(252,227,77,.25);letter-spacing:2px;
+  animation:stampIn .6s cubic-bezier(.2,1.5,.4,1);margin-top:.6rem;
+}
+@keyframes stampIn{0%{transform:scale(2.6) rotate(10deg);opacity:0}60%{transform:scale(.94) rotate(-7deg);opacity:1}100%{transform:scale(1) rotate(-6deg)}}
+
+/* ============ CHECKLIST ============ */
+.check-card{
+  background:var(--paper);border:var(--border);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-soft);padding:clamp(1.4rem,4vw,2.6rem);
+}
+.check-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;margin-bottom:1.2rem}
+.check-head h2{font-size:clamp(1.4rem,2.2vw,2.1rem)}
+.check-count{font-family:var(--font-head);font-weight:600;background:var(--yellow);border:var(--border);border-radius:999px;padding:.3rem 1rem;box-shadow:0 3px 0 var(--ink)}
+.check-progress{height:22px;border:var(--border);border-radius:999px;background:var(--bg);overflow:hidden;margin-bottom:1.3rem}
+.check-progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--green),#57C48C);transition:width .5s cubic-bezier(.2,.8,.3,1)}
+.check-progress>div.full{background:linear-gradient(90deg,var(--green),#3AAE77)}
+.check-item{
+  display:flex;align-items:center;gap:1.15rem;border:var(--border);border-radius:18px;
+  padding:1rem 1.2rem;margin-bottom:.8rem;cursor:pointer;background:var(--paper);
+  transition:background .25s,transform .2s;min-height:64px;box-shadow:0 3px 0 var(--ink);
+}
+.check-item:hover{transform:translateY(-3px)}
+.check-item .box{
+  flex:none;width:34px;height:34px;border:var(--border);border-radius:10px;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;transition:background .2s;
+}
+.check-item .box svg{opacity:0;transform:scale(.3);transition:opacity .2s,transform .3s cubic-bezier(.2,1.6,.4,1)}
+.check-item.checked{background:#E9FBEF}
+.check-item.checked .box{background:var(--green)}
+.check-item.checked .box svg{opacity:1;transform:scale(1)}
+.check-item.checked span{text-decoration:line-through;opacity:.75}
+.check-item span{font-weight:700;font-size:clamp(1rem,1.2vw,1.15rem)}
+.check-pop{animation:checkPop .4s}
+@keyframes checkPop{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+
+/* ============ FOOTER ============ */
+footer{
+  margin-top:2rem;border-top:var(--border);background:var(--paper);
+  padding:clamp(2.5rem,6vw,4rem) 0 2.5rem;text-align:center;
+}
+.footer-brand{
+  font-family:var(--font-head);font-weight:700;font-size:clamp(2rem,6vw,4rem);
+  letter-spacing:2px;display:inline-block;
+}
+.footer-brand .underline{height:10px;background:var(--yellow);border:2px solid var(--ink);border-radius:999px;margin-top:.2rem}
+.footer-tag{margin:.8rem 0 1.6rem;font-weight:600;color:var(--gray)}
+.footer-note{font-size:.85rem;color:var(--gray)}
+
+/* ============ CONFETTI ============ */
+.confetti-piece{
+  position:fixed;top:-20px;z-index:300;pointer-events:none;
+  animation:confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  to{transform:translateY(110vh) rotate(720deg);opacity:.9}
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:960px){
+  .how-grid{grid-template-columns:1fr}
+  .hero-stats{width:min(560px,100%)}
+  .ps-head .ps-count{margin-left:0}
+  .pill-nav .nav-cta{display:none}
+}
+@media (max-width:640px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .pill-nav{width:calc(100% - 4%);justify-content:space-between;flex-wrap:wrap}
+  .pill-nav .nav-cta{display:none}
+  .hero h1{max-width:100%;font-size:clamp(2rem,9vw,3rem)}
+  .hero-stats{grid-template-columns:1fr;gap:.8rem}
+  .stat{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;text-align:left}
+  .toggle-card{flex-direction:column;align-items:flex-start}
+  .switch-wrap{align-items:flex-start}
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .h-word>span{transform:none;opacity:1}
+  .hero-sub,.hero-ctas,.hero-stats{opacity:1;transform:none}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div id="scrollbar-top"></div>
+
+<header>
+  <nav class="pill-nav" id="pillNav">
+    <a class="brand" href="#top">
+      <span class="brand-dot"></span>rawde_vvvvvv
+    </a>
+    <div class="nav-links">
+      <a href="#usernames">Usernames</a>
+      <a href="#bios">Bios</a>
+      <a href="#content">30-Day Ideas</a>
+      <a href="#strategy">Strategy</a>
+    </div>
+    <a class="nav-cta" href="#how">Kaise Use Karein</a>
+    <button class="burger" id="burgerBtn" aria-label="Menu kholo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="nav-drop" id="navDrop">
+      <a href="#how">Kaise Use Karein</a>
+      <a href="#usernames">Username Prompts</a>
+      <a href="#bios">Bio Prompts</a>
+      <a href="#content">30-Day Content Ideas</a>
+      <a href="#strategy">Posting Strategy</a>
+      <a href="#hinglish">Hinglish Mode</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Intro">
+    <h1 id="heroH1">Naya page start kar rahe ho? Prompt karo.</h1>
+    <p class="hero-sub">Naya Instagram page start kar rahe ho aur samajh nahi aa raha <strong>username, bio, ya content</strong> kya post karein? Maine ek free PDF banayi hai jisme <strong>ready prompts</strong> hain — bas woh prompts Claude ya ChatGPT mein paste karo aur <strong>seconds mein</strong> apna username, bio aur pehle 30 din ke content ideas mil jaayenge.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#usernames">
+        Prompts Dekho
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.6" stroke-linecap="round"><path d="M12 4v14m0 0l-6-6m6 6l6-6"/></svg>
+      </a>
+      <a class="btn btn-secondary" href="#hinglish">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" fill="#FCE34D" stroke="#2D2D2D" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Hinglish Mode
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat reveal">
+        <span class="pill-tag">PROMPTS</span>
+        <div class="num" data-count="9">0</div>
+        <div class="lbl">ready prompts, copy-paste ke liye</div>
+      </div>
+      <div class="stat reveal" style="--i:1">
+        <span class="pill-tag">CATEGORIES</span>
+        <div class="num" data-count="4">0</div>
+        <div class="lbl">username, bio, content, strategy</div>
+      </div>
+      <div class="stat reveal" style="--i:2">
+        <span class="pill-tag">CALENDAR</span>
+        <div class="num" data-count="30">0</div>
+        <div class="lbl">din ke content ideas, ek prompt mein</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>USERNAME &bull; BIO &bull; CONTENT CALENDAR &bull; POSTING STRATEGY &bull; CLAUDE &bull; CHATGPT &bull; FREE PDF &bull; </span>
+      <span>USERNAME &bull; BIO &bull; CONTENT CALENDAR &bull; POSTING STRATEGY &bull; CLAUDE &bull; CHATGPT &bull; FREE PDF &bull; </span>
+    </div>
+  </div>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section id="how" aria-label="Kaise use karein">
+    <div class="how-card reveal">
+      <div class="how-head">
+        <h2>Kaise use karein?</h2>
+        <span class="tag">3 STEPS</span>
+      </div>
+      <div class="how-grid">
+        <div class="step reveal">
+          <span class="s-num">1</span>
+          <h3>Prompt copy karo</h3>
+          <p>Neeche se koi bhi prompt tap karke copy karo — Claude ya ChatGPT ke liye ready hai.</p>
+        </div>
+        <div class="step reveal" style="--i:1">
+          <span class="s-num">2</span>
+          <h3>Brackets bharo</h3>
+          <p><em>[ brackets ]</em> ke andar ki jagah apni apni details likh do — niche, audience, jo bhi poocha hai.</p>
+        </div>
+        <div class="step reveal" style="--i:2">
+          <span class="s-num">3</span>
+          <h3>Paste karo, use karo</h3>
+          <p>Prompt paste karo aur jo result aaye, use <strong>directly</strong> apne page pe lagao.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 1. USERNAME PROMPTS ============ -->
+  <section id="usernames" aria-label="Username prompts">
+    <div class="prompt-section reveal">
+      <div class="ps-head">
+        <span class="ps-num">PACK 1</span>
+        <h2>Username Prompts</h2>
+        <span class="ps-count">3 prompts</span>
+      </div>
+      <div class="ps-body">
+        <p class="ps-intro">Page ka naam hi pehli impression hai. Ye teeno prompts milke tumhe short, catchy aur brandable usernames nikaal ke denge.</p>
+
+        <div class="prompt-card reveal">
+          <div class="p-tag"><span class="p-num">PROMPT 1</span><span class="p-title">15 brandable usernames — niche + audience</span></div>
+          <p class="prompt-text">You are an Instagram branding expert. I want to start an Instagram page in the <em>[your niche]</em> niche, targeting <em>[your target audience]</em>. Suggest 15 short, catchy, brandable usernames. Rules: avoid random numbers, keep most under 15 characters, make them easy to say out loud and easy to spell, and choose names that will still make sense if the page grows into a bigger brand. Present them as a table with three columns: Username, Why it works (one line), and Vibe (fun / expert / premium). End by highlighting your top 3 picks with a one-line reason each.</p>
+          <button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card reveal" style="--i:1">
+          <div class="p-tag"><span class="p-num">PROMPT 2</span><span class="p-title">Naam + niche mix — 10 usernames</span></div>
+          <p class="prompt-text">You are a personal branding strategist. My real name is <em>[your name]</em> and my content will be about <em>[your niche]</em>. Suggest 10 usernames that mix my name with my niche in a professional but memorable way — founder-style, not a random page. Avoid numbers, hyphens and misspellings that look unprofessional. For each username, add a one-line note on the impression it creates. At the end, mark your top 3 picks and explain in one line each why they are the strongest.</p>
+          <button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card reveal" style="--i:2">
+          <div class="p-tag"><span class="p-num">PROMPT 3</span><span class="p-title">Expert personal brand — 10 usernames</span></div>
+          <p class="prompt-text">You are a personal brand consultant. I am building a personal brand page around <em>[your niche/skill]</em>, where I want to be seen as an expert, not just a random page. Suggest 10 Instagram usernames that are clean, easy to spell and type, and instantly signal authority in my niche. Avoid overused filler words like "official", "hub" or "gram" unless they genuinely fit. Rank all 10 from most to least authoritative, with a one-line reason for each.</p>
+          <button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. BIO PROMPTS ============ -->
+  <section id="bios" aria-label="Bio prompts">
+    <div class="prompt-section reveal">
+      <div class="ps-head">
+        <span class="ps-num">PACK 2</span>
+        <h2>Bio Prompts</h2>
+        <span class="ps-count">2 prompts</span>
+      </div>
+      <div class="ps-body">
+        <p class="ps-intro">Profile pe aane ke baad bio hi decide karti hai ki follow hoga ya nahi. Dono prompts ready-made options nikaal ke denge.</p>
+
+        <div class="prompt-card reveal">
+          <div class="p-tag"><span class="p-num">PROMPT 1</span><span class="p-title">5 bio options — hook + value + CTA</span></div>
+          <p class="prompt-text">You are an Instagram copywriter. Write 5 different Instagram bio options for a <em>[your niche]</em> page. Each bio must have: (1) a one-line hook that stops the scroll, (2) a clear statement of the value I provide, and (3) a short call-to-action to follow or DM. Keep each bio under 150 characters and use 2-3 relevant emojis. After the 5 options, pick the strongest one and explain in one line why it converts best.</p>
+          <button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card reveal" style="--i:1">
+          <div class="p-tag"><span class="p-num">PROMPT 2</span><span class="p-title">Tone-pick bio — 3-4 lines + link CTA</span></div>
+          <p class="prompt-text">You are an Instagram bio specialist. Write an Instagram bio for a <em>[your niche]</em> page in a <em>[fun / professional / motivational — pick one]</em> tone. Structure it as 3-4 short lines with line breaks: line 1 = hook, line 2 = who I help and how, line 3 = proof or personality, final line = a CTA to check the link in bio. Also give me 2 alternative versions of line 1 (the hook) so I can test which one performs better.</p>
+          <button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. CONTENT IDEA PROMPTS ============ -->
+  <section id="content" aria-label="Content idea prompts">
+    <div class="prompt-section reveal">
+      <div class="ps-head">
+        <span class="ps-num">PACK 3</span>
+        <h2>Content Idea Prompts — 30-Day Calendar</h2>
+        <span class="ps-count">3 prompts</span>
+      </div>
+      <div class="ps-body">
+        <p class="ps-intro">"Kal kya post karun?" ka confusion khatam. Ek prompt se poore 30 din ka calendar, reel ideas aur carousel ideas — sab ready.</p>
+
+        <div class="prompt-card reveal">
+          <div class="p-tag"><span class="p-num">PROMPT 1</span><span class="p-title">Poora 30-day content calendar</span></div>
+          <p class="prompt-text">You are an Instagram content strategist. Create a 30-day Instagram content calendar for a <em>[your niche]</em> page targeting <em>[your target audience]</em>. Mix reels, carousels, and static posts in a healthy ratio (roughly 50% reels, 30% carousels, 20% static). For each day give only: day number, format (reel / carousel / static), and a one-line topic idea — no scripts. Balance educational, relatable, trend-based and selling content across the month, and mark your 5 strongest days with a star so I know what to prioritize.</p>
+          <button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card reveal" style="--i:1">
+          <div class="p-tag"><span class="p-num">PROMPT 2</span><span class="p-title">15 beginner-friendly reel ideas</span></div>
+          <p class="prompt-text">You are a short-form video strategist. Suggest 15 reel topic ideas for a <em>[your niche]</em> page that a complete beginner can film with just a phone in under 15 minutes each. Each idea should be likely to be saved or shared, not just liked. For every idea give three things: the one-line topic, why it gets saved or shared, and what the first 2 seconds of the reel should show so people stop scrolling.</p>
+          <button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy Prompt</button>
+        </div>
+
+        <div class="prompt-card reveal" style="--i:2">
+          <div class="p-tag"><span class="p-num">PROMPT 3</span><span class="p-title">10 carousel ideas — slide by slide</span></div>
+          <p class="prompt-text">You are an Instagram carousel expert. Suggest 10 carousel post ideas for a <em>[your niche]</em> page. For each idea give: a scroll-stopping title, and a one-line description of what each slide should cover (slide 1 = hook, last slide = CTA). Prioritize carousels valuable enough to save, and for each one, call out the single line on slide 1 that will make people swipe.</p>
+          <button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. POSTING STRATEGY ============ -->
+  <section id="strategy" aria-label="Posting strategy prompt">
+    <div class="prompt-section reveal">
+      <div class="ps-head">
+        <span class="ps-num">PACK 4</span>
+        <h2>Posting Strategy Prompt</h2>
+        <span class="ps-count">1 prompt</span>
+      </div>
+      <div class="ps-body">
+        <p class="ps-intro">Sirf content kaafi nahi — timing aur consistency bhi chahiye. Ye prompt tumhari weekly schedule bana dega, burnout ke bina.</p>
+
+        <div class="prompt-card reveal">
+          <div class="p-tag"><span class="p-num">PROMPT 1</span><span class="p-title">Weekly schedule — grow without burnout</span></div>
+          <p class="prompt-text">You are an Instagram growth coach. I run a <em>[your niche]</em> Instagram page with <em>[current follower count]</em> followers, and I can realistically give <em>[hours available per week]</em> hours per week. Suggest a weekly posting schedule — which days, what time of day, and how many reels vs carousels vs static posts — so I grow consistently without burning out. Also include a 30-minute weekly batch-prep routine, and tell me exactly what to do if I miss a posting day.</p>
+          <button class="copy-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="2.2" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy Prompt</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HINGLISH TOGGLE ============ -->
+  <section id="hinglish" aria-label="Hinglish mode">
+    <div class="toggle-card reveal">
+      <div class="t-left">
+        <h2>Hinglish Mode</h2>
+        <p><strong>Tip:</strong> Agar output Hinglish mein chahiye English ki jagah, toh kisi bhi prompt ke end mein <strong>"Reply in Hinglish"</strong> add kar do. Ya upar ka switch ON karo — main har copied prompt mein ye line khud add kar dunga.</p>
+        <div id="toggleStampWrap"></div>
+      </div>
+      <div class="switch-wrap">
+        <label class="switch" aria-label="Hinglish mode on ya off karo">
+          <input type="checkbox" id="hinglishToggle">
+          <span class="slider"></span>
+        </label>
+        <span class="t-state" id="tState">OFF — English copies</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SETUP CHECKLIST ============ -->
+  <section id="checklist" aria-label="Setup checklist">
+    <div class="check-card reveal">
+      <div class="check-head">
+        <h2>Page setup checklist</h2>
+        <span class="check-count"><span id="checkNum">0</span>/4 done</span>
+      </div>
+      <div class="check-progress"><div id="checkBar"></div></div>
+      <div class="check-item" data-check>
+        <span class="box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg></span>
+        <span>Username final kar liya</span>
+      </div>
+      <div class="check-item" data-check>
+        <span class="box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg></span>
+        <span>Bio set kar di</span>
+      </div>
+      <div class="check-item" data-check>
+        <span class="box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg></span>
+        <span>30-day content calendar ready</span>
+      </div>
+      <div class="check-item" data-check>
+        <span class="box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2D2D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg></span>
+        <span>Posting schedule fix — ab bas consistent raho</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-brand reveal">rawde_vvvvvv<div class="underline"></div></div>
+  <p class="footer-tag reveal" style="--i:1">Username, bio, content, strategy — sab kuch, seconds mein.</p>
+  <p class="footer-note reveal" style="--i:2">Instagram Page Setup &bull; Prompt Pack &bull; Claude / ChatGPT ready</p>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- hero staggered words ---------- */
+  var h1 = document.getElementById('heroH1');
+  var words = h1.textContent.trim().split(/\s+/);
+  h1.innerHTML = words.map(function(w,i){
+    return '<span class="h-word"><span style="--w:'+i+'">'+w+'</span></span>';
+  }).join(' ');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('loaded'); }); });
+  setTimeout(function(){ h1.classList.add('settled'); }, 1600);
+
+  /* ---------- scroll progress bar ---------- */
+  var bar = document.getElementById('scrollbar-top');
+  function onScroll(){
+    var h = document.documentElement;
+    var p = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+    bar.style.width = (p*100).toFixed(2)+'%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- mobile nav ---------- */
+  var burger = document.getElementById('burgerBtn');
+  var drop = document.getElementById('navDrop');
+  burger.addEventListener('click', function(){ drop.classList.toggle('open'); });
+  drop.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ drop.classList.remove('open'); }); });
+
+  /* ---------- reveal on scroll ---------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* ---------- count-up numbers ---------- */
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target, target = parseInt(el.dataset.count,10);
+      cio.unobserve(el);
+      if(reduce){ el.textContent = target; return; }
+      var t0 = null;
+      function step(t){
+        if(!t0) t0 = t;
+        var p = Math.min((t - t0)/900, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1-p,3)));
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, {threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+  /* ---------- hinglish toggle ---------- */
+  var hinglishOn = false;
+  var toggle = document.getElementById('hinglishToggle');
+  var stampWrap = document.getElementById('toggleStampWrap');
+  var tState = document.getElementById('tState');
+  toggle.addEventListener('change', function(){
+    hinglishOn = toggle.checked;
+    tState.textContent = hinglishOn ? 'ON — Hinglish copies' : 'OFF — English copies';
+    tState.classList.toggle('on', hinglishOn);
+    stampWrap.innerHTML = '';
+    if(hinglishOn){
+      var s = document.createElement('span');
+      s.className = 'big-stamp';
+      s.textContent = 'HINGLISH MODE ON!';
+      stampWrap.appendChild(s);
+      confetti(40);
+      setTimeout(function(){ if(stampWrap.contains(s)) s.remove(); }, 3500);
+    }
+  });
+
+  /* ---------- copy buttons ---------- */
+  function copyText(txt, cb){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(cb, function(){ legacy(txt); cb(); });
+    } else { legacy(txt); cb(); }
+  }
+  function legacy(txt){
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(err){}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('.prompt-card');
+      var txt = card.querySelector('.prompt-text').innerText.trim();
+      if(hinglishOn){ txt = txt + ' Reply in Hinglish'; }
+      copyText(txt, function(){
+        btn.classList.add('done');
+        var label = btn.innerHTML;
+        btn.innerHTML = '<span class="stamp-pop">Copy ho gaya!</span>';
+        setTimeout(function(){ btn.classList.remove('done'); btn.innerHTML = label; }, 1600);
+      });
+    });
+  });
+
+  /* ---------- confetti ---------- */
+  var COLORS = ['#FCE34D','#F39C4D','#A8E6CF','#B2EBF2','#2D2D2D'];
+  function confetti(n){
+    if(reduce) return;
+    for(var i=0;i<n;i++){
+      var c = document.createElement('div');
+      c.className = 'confetti-piece';
+      var s = 6 + Math.random()*8;
+      c.style.cssText = 'left:'+(Math.random()*100)+'vw;width:'+s+'px;height:'+(s*.6)+'px;background:'+COLORS[i%COLORS.length]+';border:1.5px solid #2D2D2D;border-radius:3px;animation-duration:'+(1.8+Math.random()*1.8)+'s;animation-delay:'+(Math.random()*.4)+'s;transform:rotate('+Math.random()*360+'deg)';
+      document.body.appendChild(c);
+      (function(el){ setTimeout(function(){ el.remove(); }, 4200); })(c);
+    }
+  }
+
+  /* ---------- setup checklist ---------- */
+  var items = document.querySelectorAll('[data-check]');
+  var cNum = document.getElementById('checkNum'), cBar = document.getElementById('checkBar');
+  function updateCheck(){
+    var n = document.querySelectorAll('[data-check].checked').length;
+    cNum.textContent = n;
+    cBar.style.width = (n/4*100)+'%';
+    cBar.classList.toggle('full', n===4);
+    if(n===4){ confetti(70); }
+  }
+  items.forEach(function(el){
+    el.setAttribute('role','checkbox');
+    el.setAttribute('tabindex','0');
+    function toggle(){
+      el.classList.toggle('checked');
+      el.classList.add('check-pop');
+      setTimeout(function(){ el.classList.remove('check-pop'); }, 420);
+      el.setAttribute('aria-checked', el.classList.contains('checked'));
+      updateCheck();
+    }
+    el.addEventListener('click', toggle);
+    el.addEventListener('keydown', function(e){
+      if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
